@@ -2,13 +2,14 @@ import {Sequelize} from "sequelize";
 import mysql from "mysql2/promise";
 
 import Games from "../model/games.js";
+import Teams from "../model/teams.js";
 
 const database = {}
 const credentials = {
     host:"localhost",
     user:"root",
     password:"",
-    database:"euroBasket"
+    database:"euroLeague"
 }
 
 try {
@@ -22,11 +23,11 @@ try {
     await connection.query('CREATE DATABASE IF NOT EXISTS '+ credentials.database)
     const sequelize = new Sequelize(credentials.database, credentials.user, credentials.password, {dialect: "mysql"})
     
-    database.Posts = Games(sequelize)
-    // database.Users = Users(sequelize)
-    console.log("veikia");
+    database.Games = Games(sequelize)
+    database.Teams = Teams(sequelize)
+    
 
-    await sequelize.sync({alter: false})
+    await sequelize.sync({alter: true})
 } catch (error) {
     console.log(error)
     console.log("nepavyko prisijungti prie duomenu bazės");
