@@ -2,7 +2,7 @@ import express from 'express';
 import cors from 'cors'
 
 import games from './controller/games.js';
-import teams from './controller/teams.js';
+import results from './controller/results.js';
 
 // import database from './database/connect.js';
 
@@ -24,8 +24,8 @@ app.use(express.urlencoded({extended:true}))
 
 app.set('trust proxy', 1) // trust first proxy
 
-app.use('/games', games)
-app.use('/teams', teams)
+app.use('/games/', games)
+app.use('/results/', results)
 
 
 app.listen(3000)

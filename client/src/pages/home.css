@@ -1,0 +1,60 @@
+
+
+
+
+.cards-container{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin: 0 auto;
+    padding: 50px 100px;
+}
+
+.card{
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(233, 233, 233, 0.391);
+    border-radius: 10px;
+    padding: 30px;
+    text-align: center;
+    width: 550px;
+    margin-bottom: 25px;
+}
+.tournament-info{
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+.tournament-info img{
+    width:80px;
+
+}
+
+.card-bottom{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+.team-info{
+    width: 35%;
+}
+.game-info{
+    width: 30%
+}
+
+.team-info img {
+    width: auto;
+    height:85px
+
+}
+
+.game-date{
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.team-name{
+    font-weight: bold;
+}

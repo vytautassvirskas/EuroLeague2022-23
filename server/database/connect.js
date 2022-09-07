@@ -1,8 +1,8 @@
-import {Sequelize} from "sequelize";
+import {HasMany, Sequelize} from "sequelize";
 import mysql from "mysql2/promise";
 
 import Games from "../model/games.js";
-import Teams from "../model/teams.js";
+import Results from "../model/results.js";
 
 const database = {}
 const credentials = {
@@ -24,10 +24,13 @@ try {
     const sequelize = new Sequelize(credentials.database, credentials.user, credentials.password, {dialect: "mysql"})
     
     database.Games = Games(sequelize)
-    database.Teams = Teams(sequelize)
+    database.Results = Results(sequelize)
+
+    database.Games.hasMany(database.Results)
+    database.Results.belongsTo(database.Games)
     
 
-    await sequelize.sync({alter: true})
+    await sequelize.sync({alter: false})
 } catch (error) {
     console.log(error)
     console.log("nepavyko prisijungti prie duomenu bazės");
