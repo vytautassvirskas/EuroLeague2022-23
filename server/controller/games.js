@@ -10,14 +10,12 @@ import upload from '../middleware/multer.js';
 const router = express.Router();
 
 router.get("/", async(req,res)=>{
-    // const options ={}
-    // options.order = [["date", "ASC"]]
 try {
     const games = await db.Games.findAll({
         include: db.Results,
         order: [["date", "ASC"]]
     })
-
+    
     res.json (games)
     
 } catch {
@@ -28,7 +26,6 @@ try {
 
 // be foto ikelimo
 router.post("/", async(req,res)=>{
-    console.log(req.files)
     try {
         new db.Games(req.body).save()
         res.send("Įrašas sėkmingai sukurtas")

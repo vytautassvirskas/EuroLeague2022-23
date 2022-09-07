@@ -16,8 +16,7 @@ const Results = (sequelize)=>{
         },
         gameId:{
             type: DataTypes.INTEGER,
-            allowNull: false,
-            defaultValue: 18
+            allowNull: false
         }
     }
     return sequelize.define("results", Schema)

@@ -32,10 +32,23 @@ const Home = () => {
                   <img src={game.team1Logo} alt="team1Logo"/>
                   <p className='team-name'>{game.team1Name}</p>
                 </div>
+                {game.results.length>0?(
                 <div className='game-info'>
-                  <p className='game-date'>{convertDate(game.date)}</p>
-                  <p className='game-date'>{game.place}</p>
+                  <p className='game-dashboard'> 25:58</p>
+                  <div className='link-wrapper'>
+                      <Link to={"/results/"+game.id} className='stats-link'><img src="https://www.svgrepo.com/show/54740/stats.svg" alt="stats-logo" /></Link>
+                    </div>
                 </div>
+                ):(
+                  <div className='game-info'>
+                    <p className='game-date'>{convertDate(game.date)}</p>
+                    <p className='game-date'>{game.place}</p>
+                    <div className='link-wrapper'>
+                      <Link to={"/results/"+game.id} className='stats-link'><img src="https://www.svgrepo.com/show/54740/stats.svg" alt="stats-logo" /></Link>
+                    </div>
+                  </div>
+                )                
+                }
                 <div className='team-info'>
                   <img src={game.team2Logo} alt="team1Logo"/>
                   <p className='team-name'>{game.team2Name}</p>
