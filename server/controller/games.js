@@ -13,8 +13,7 @@ router.get("/", async(req,res)=>{
 try {
     const games = await db.Games.findAll({
         include: db.Results,
-        order: [["date", "ASC"]],
-        raw: true
+        order: [["date", "ASC"]]
     })
     console.log(games[0]);
     res.json (games)
