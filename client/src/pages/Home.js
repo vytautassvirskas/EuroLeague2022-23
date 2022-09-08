@@ -39,7 +39,7 @@ const Home = () => {
             <div key={game.id} className='card'>
               <div className='tournament-info'>
                 <img src="https://media-cdn.incrowdsports.com/23610a1b-1c2e-4d2a-8fe4-ac2f8e400632.svg" alt="euroleague-logo" />
-                <p className='trounament-name'>{game.tournament}</p>
+                {/* <p className='trounament-name'>{game.tournament}</p> */}
               </div>
               
               <div className='card-bottom'>
