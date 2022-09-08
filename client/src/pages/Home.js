@@ -5,6 +5,7 @@ import convertDate from '../utils/Date'
 import "./home.css"
 
 const Home = () => {
+  
   const[games, setGames]=useState([])
 
   useEffect(() => {
@@ -34,9 +35,12 @@ const Home = () => {
                 </div>
                 {game.results.length>0?(
                 <div className='game-info'>
-                  <p className='game-dashboard'> 25:58</p>
+                  <p className='game-dashboard'> X:X</p>
                   <div className='link-wrapper'>
-                      <Link to={"/results/"+game.id} className='stats-link'><img src="https://www.svgrepo.com/show/54740/stats.svg" alt="stats-logo" /></Link>
+                      <Link to={"/results/"+game.id+"?team1Name="+game.team1Name+"&team2Name="+game.team2Name} 
+                      className='stats-link'>
+                        <img src="https://www.svgrepo.com/show/54740/stats.svg" alt="stats-logo" />
+                      </Link>
                     </div>
                 </div>
                 ):(
@@ -44,7 +48,10 @@ const Home = () => {
                     <p className='game-date'>{convertDate(game.date)}</p>
                     <p className='game-date'>{game.place}</p>
                     <div className='link-wrapper'>
-                      <Link to={"/results/"+game.id} className='stats-link'><img src="https://www.svgrepo.com/show/54740/stats.svg" alt="stats-logo" /></Link>
+                    <Link to={"/results/"+game.id+"?team1Name="+game.team1Name+"&team2Name="+game.team2Name} 
+                    className='stats-link'>
+                      <img src="https://www.svgrepo.com/show/54740/stats.svg" alt="stats-logo" />
+                      </Link>
                     </div>
                   </div>
                 )                

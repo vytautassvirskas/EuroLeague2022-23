@@ -16,29 +16,19 @@ router.post("/:id", async(req,res)=>{
 })
 
 router.get("/:id", async(req,res)=>{
-    console.log("req.body zemiau: ");
-    console.log(req.body);
+    console.log("req.query zemiau: ");
+    console.log(req.query);
     try {
         const results = await db.Results.findAll({
             include: db.Games,
             order: [["time", "DESC"]],
             where: { gameId: req.params.id }
         })
-        // console.log(results);
 
         const gameInfo = await db.Games.findByPk(req.params.id)
-        console.log(gameInfo);
-
     
-        const team1Sum = await db.Results.sum('points', { where: { teamName: "Žalgiris"  } });
-       
-    
-        const team2Sum = await db.Results.sum('points', { where: { teamName: "LDLC ASVEL"  } });
-        const totalSum = await db.Results.sum('points');
-        
-        console.log(team1Sum);
-        console.log(team2Sum);
-        console.log(totalSum);
+        const team1Sum = await db.Results.sum('points', { where: { teamName: gameInfo.dataValues.team1Name  } });
+        const team2Sum = await db.Results.sum('points', { where: { teamName: gameInfo.dataValues.team2Name  } });
        
         res.json({results, team1Sum, team2Sum, gameInfo})
     } catch {
@@ -49,3 +39,4 @@ router.get("/:id", async(req,res)=>{
 
 
 export default router
+

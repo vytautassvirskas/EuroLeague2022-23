@@ -43,6 +43,12 @@
 .game-info{
     width: 30%
 }
+.game-dashboard{
+    font-size: 28px;
+    font-weight: bold;
+    letter-spacing: 5px;
+    margin: 0;
+}
 .link-wrapper{
     text-align: center;
 }

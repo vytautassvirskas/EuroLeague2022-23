@@ -3,6 +3,22 @@
     background-color: #f1faee; */
     padding-top: 50px;
 }
+
+.results-dashboard{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    margin-bottom: 40px;
+}
+.result-dash-logo{
+    height: 100px;
+}
+.points-numbers{
+    font-size: 32px;
+    font-weight: bold;
+    letter-spacing: 5px;
+}
 .results-add-container{
    background-color: #457b9d;
    border-radius: 10px;
@@ -89,6 +105,10 @@ flex-direction: column;
 .team2-info{
     display: flex;
     justify-content: left ; 
+}
+.team-name-small{
+    font-weight: bold;
+    letter-spacing: 3px;
 }
 .game-time-info{
     display: flex;

@@ -4,6 +4,7 @@ import axios from "axios"
 import "./results.css"
 
 const Results = () => {
+ 
   const {gameId}=useParams()
   const [pointsForm,setPointsForm]=useState({
     points: '',
@@ -17,17 +18,19 @@ const Results = () => {
   const [refresh,setRefresh]=useState(false)
   const [stats, setStats] = useState([])
   const [gameInfo, setGameInfo]=useState({})
+  const [team1Sum, setTeam1Sum] = useState("")
+  const [team2Sum, setTeam2Sum] = useState("")
   const [gameEnded, setGameEnded] = useState(false)
   const navigate = useNavigate();
 
   useEffect(()=>{
-    console.log(gameId);
     axios.get('/results/'+gameId)
     .then(resp =>{
-      console.log(resp)
-      // setStats(resp.data)
+      console.log(resp);
       setStats(resp.data.results)
       setGameInfo(resp.data.gameInfo)
+      setTeam1Sum(resp.data.team1Sum)
+      setTeam2Sum(resp.data.team2Sum)
     })
     .catch(error=>{
       console.log(error);
@@ -36,6 +39,7 @@ const Results = () => {
         status: 'danger'
       });
     })
+    console.log("suma 1 omanda: "+team1Sum);
   },[refresh])
  
   const handleForm = (e) =>{
@@ -45,10 +49,10 @@ const Results = () => {
 
   const handleAdd = (e)=>{
     e.preventDefault()
-    console.log("veikia");
     axios.post("/results/"+gameId, pointsForm)
     .then(resp=>{
       setRefresh(!refresh)
+      console.log(resp)
       setAlert({
 				message: resp.data,
 				status: 'success'
@@ -61,11 +65,19 @@ const Results = () => {
         status: 'success'
       });
     })
-    
+
   }
 
   return (
     <div className='results-page'>
+
+      <div className='results-dashboard'>
+        <img className='result-dash-logo' src={gameInfo.team1Logo} alt='team-logo'></img>
+        <p className='points-numbers'>
+          {team1Sum?(<>{team1Sum}</>):"0"} : {team2Sum?(<>{team2Sum}</>):"0"}
+          </p>
+        <img className='result-dash-logo' src={gameInfo.team2Logo} alt='team-logo'></img>
+      </div>
       <div className='results-add-container'>
         <h1 className='results-add-title'>Taškų įvedimas</h1>
         <form action="" className='form' onSubmit={(e)=>handleAdd(e)}>
@@ -105,7 +117,7 @@ const Results = () => {
         </form>
       </div>
       <div className='results-show-container'>
-        {stats&& stats.map(data=>{
+        {stats.length>0&& stats.map(data=>{
           if(data.teamName == data.game.team1Name){
             return (
               <div key={data.id} className='results-show-card' style={{borderLeft: "4px solid black"}}>
