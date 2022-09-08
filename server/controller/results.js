@@ -6,6 +6,7 @@ const router = express.Router();
 
 router.post("/:id", async(req,res)=>{
     try {
+        
         req.body.gameId =req.params.id
         new db.Results(req.body).save()
         res.send("Įrašas sėkmingai sukurtas")
@@ -18,6 +19,8 @@ router.post("/:id", async(req,res)=>{
 router.get("/:id", async(req,res)=>{
     console.log("req.query zemiau: ");
     console.log(req.query);
+    console.log("req.params zemiau: ");
+    console.log(req.params);
     try {
         const results = await db.Results.findAll({
             include: db.Games,

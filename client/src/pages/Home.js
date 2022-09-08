@@ -7,16 +7,30 @@ import "./home.css"
 const Home = () => {
   
   const[games, setGames]=useState([])
+  const [loading, setLoading] = useState(false) 
 
   useEffect(() => {
+    setLoading(true);
     axios.get('/games/')
     .then(resp =>{
+      setLoading(false);
       console.log(resp)
       setGames(resp.data)
     }
         )
   }, [])
-
+	if (loading) {
+		return (
+			<main className="main spinner-container">
+				<div className="lds-ring">
+					<div />
+					<div />
+					<div />
+					<div />
+				</div>
+			</main>
+		);
+	}
   return (
     <div className='main-page'>
       <div className='cards-container'>
@@ -31,11 +45,11 @@ const Home = () => {
               <div className='card-bottom'>
                 <div className='team-info'>
                   <img src={game.team1Logo} alt="team1Logo"/>
-                  <p className='team-name'>{game.team1Name}</p>
+                  <p className='team-name-home'>{game.team1Name}</p>
                 </div>
-                {game.results.length>0?(
+                {game.team1Sum?(
                 <div className='game-info'>
-                  <p className='game-dashboard'> X:X</p>
+                  <p className='game-dashboard'> {game.team1Sum?(<>{game.team1Sum}</>):"0"}:{game.team2Sum?(<>{game.team2Sum}</>):"0"}</p>
                   <div className='link-wrapper'>
                       <Link to={"/results/"+game.id+"?team1Name="+game.team1Name+"&team2Name="+game.team2Name} 
                       className='stats-link'>
@@ -58,9 +72,16 @@ const Home = () => {
                 }
                 <div className='team-info'>
                   <img src={game.team2Logo} alt="team1Logo"/>
-                  <p className='team-name'>{game.team2Name}</p>
+                  <p className='team-name-home'>{game.team2Name}</p>
                 </div>
               </div>
+              {game.team1Sum?(
+                <div className='live-stream-wrapepr'><p className='live-stream-add'>VYKSTA VARŽYBOS</p></div>
+              ):(
+                ""
+                // <div className='live-stream-wrapepr-empty'></div>
+              )
+              }
             </div>
           )
         })

@@ -20,12 +20,14 @@ const Results = () => {
   const [gameInfo, setGameInfo]=useState({})
   const [team1Sum, setTeam1Sum] = useState("")
   const [team2Sum, setTeam2Sum] = useState("")
-  const [gameEnded, setGameEnded] = useState(false)
-  const navigate = useNavigate();
+  const [loading, setLoading] = useState(false) 
+;
 
   useEffect(()=>{
+    setLoading(true);
     axios.get('/results/'+gameId)
     .then(resp =>{
+      setLoading(false);
       console.log(resp);
       setStats(resp.data.results)
       setGameInfo(resp.data.gameInfo)
@@ -39,9 +41,8 @@ const Results = () => {
         status: 'danger'
       });
     })
-    console.log("suma 1 omanda: "+team1Sum);
   },[refresh])
- 
+
   const handleForm = (e) =>{
     setPointsForm({...pointsForm,[e.target.name]:e.target.value})
   }
@@ -67,7 +68,18 @@ const Results = () => {
     })
 
   }
-
+  if (loading) {
+		return (
+			<main className="main spinner-container">
+				<div className="lds-ring">
+					<div />
+					<div />
+					<div />
+					<div />
+				</div>
+			</main>
+		);
+	}
   return (
     <div className='results-page'>
 
@@ -83,8 +95,8 @@ const Results = () => {
         <form action="" className='form' onSubmit={(e)=>handleAdd(e)}>
           <div className='input-info'>
             <label htmlFor="points">Taškų skaičius</label>
-            <select name="points" id="points" onChange={(e)=>handleForm(e)}>
-              <option value="initial" selected disabled></option>
+            <select defaultValue={'DEFAULT'} name="points" id="points" onChange={(e)=>handleForm(e)}>
+              <option value="DEFAULT" disabled>Taškai</option>
               <option value="1">1</option>
               <option value="2">2</option>
               <option value="3">3</option>
@@ -92,8 +104,8 @@ const Results = () => {
           </div>
           <div className='input-info'>
             <label htmlFor="team-name">Komandos pavadinimas</label>
-            <select name="teamName" id="team-name" onChange={(e)=>handleForm(e)}>
-              <option value="initial" selected disabled></option>
+            <select defaultValue={'DEFAULT'} name="teamName" id="team-name" onChange={(e)=>handleForm(e)}>
+              <option value="DEFAULT" disabled>Rinktis komandą</option>
               {gameInfo && (
                 <>
                 <option value={gameInfo.team1Name}>{gameInfo.team1Name}</option>

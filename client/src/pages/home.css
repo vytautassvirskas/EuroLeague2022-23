@@ -4,7 +4,8 @@
 
 .cards-container{
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+    gap: 50px;
     flex-wrap: wrap;
     margin: 0 auto;
     padding: 50px 100px;
@@ -15,16 +16,21 @@
     flex-direction: column;
     background-color: rgba(233, 233, 233, 0.391);
     border-radius: 10px;
-    padding: 30px;
+    /* padding: 30px; */
     text-align: center;
-    width: 550px;
+    /* min-width: 400px;
+    max-width: 550px; */
+    width: 450px;
     margin-bottom: 25px;
+    overflow: hidden;
 }
 .tournament-info{
     display: flex; 
     justify-content: center;
     align-items: center;
     gap: 15px;
+    padding-top: 15px;
+    margin-bottom: 15px;
 }
 .tournament-info img{
     width:80px;
@@ -36,10 +42,17 @@
     justify-content: center;
     align-items: center;
     width: 100%;
+    padding-bottom: 30px;
 }
 .team-info{
-    width: 35%;
+    width: 25%;
 }
+.team-info img {
+    width: auto;
+    height:65px
+
+}
+
 .game-info{
     width: 30%
 }
@@ -48,6 +61,15 @@
     font-weight: bold;
     letter-spacing: 5px;
     margin: 0;
+}
+.live-stream-add{
+    background-color: tomato;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 10px;
+    margin: 0;
+    letter-spacing: 4px;
+    
 }
 .link-wrapper{
     text-align: center;
@@ -67,17 +89,18 @@
     filter: invert(44%) sepia(78%) saturate(302%) hue-rotate(160deg) brightness(87%) contrast(89%);
 }
 
-.team-info img {
-    width: auto;
-    height:85px
-
-}
 
 .game-date{
     font-size: 12px;
     font-weight: bold;
 }
 
-.team-name{
+.team-name-home{
     font-weight: bold;
+    font-size: 14px;
+    margin: 0;
+}
+
+.live-stream-wrapepr-empty{
+    height: 32px;
 }

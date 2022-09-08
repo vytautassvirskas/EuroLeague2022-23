@@ -53,6 +53,13 @@
 display: flex;
 flex-direction: column;
 }
+.input-info select{
+    color: #6e6e6e;
+}
+.input-info option{
+    color: #457b9d;
+
+}
 .form label{
     font-size: 14px;
     color: #ffff;

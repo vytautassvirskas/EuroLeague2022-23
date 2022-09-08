@@ -11,11 +11,31 @@ const router = express.Router();
 
 router.get("/", async(req,res)=>{
 try {
+    // const games = await db.Games.findAll({
+    //     include: db.Results,
+    //     order: [["date", "ASC"]]
+    // })
+    // console.log(games[0]);
+    // res.json (games)
+
     const games = await db.Games.findAll({
-        include: db.Results,
-        order: [["date", "ASC"]]
+
+        order: [["date", "ASC"]],
+
+        raw: true
+
     })
-    console.log(games[0]);
+
+    await Promise.all( games.map(async (game, key) => {
+
+        games[key].team1Sum = await db.Results.sum('points', { where: { gameId: game.id, teamName: game.team1Name  } })
+
+        games[key].team2Sum = await db.Results.sum('points', { where: { gameId: game.id, teamName: game.team2Name  } })
+
+    }))
+
+
+
     res.json (games)
     
 } catch {
@@ -23,6 +43,24 @@ try {
     
 }
 })
+
+
+router.get("/:id", async(req,res)=>{
+    console.log("req.query zemiau: ");
+    console.log(req.query);
+    try {
+        const games = await db.Games.findByPK(req.params.id)
+        console.log("games zemiau: ");
+        console.log(games);
+        // res.json (games)
+        
+    } catch {
+        res.status(500).send("Įvyko serverio klaida")
+        
+    }
+    })
+
+
 
 // be foto ikelimo
 router.post("/", async(req,res)=>{
